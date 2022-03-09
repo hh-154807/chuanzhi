@@ -1,6 +1,10 @@
 package com.itheima.service;
 
+import com.itheima.entity.PageResult;
+import com.itheima.entity.QueryPageBean;
 import com.itheima.pojo.CheckGroup;
+
+import java.util.List;
 
 /**
  * @ author He
@@ -8,4 +12,14 @@ import com.itheima.pojo.CheckGroup;
  */
 public interface CheckGroupService {
     public void add(CheckGroup checkGroup, Integer[] checkitemIds);
+
+    public PageResult findPage(QueryPageBean queryPageBean);
+
+    public CheckGroup findById(Integer id);
+
+    public List<Integer> findCheckItemIdsByCheckGroupId(Integer id);
+
+    public void edit(CheckGroup checkGroup, Integer[] checkitemIds);
+
+    public void delete(Integer id);
 }
