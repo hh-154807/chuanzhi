@@ -72,5 +72,9 @@
         from t_checkgroup_checkitem
         where checkgroup_id = #{id}
     </select>
+    <!--查询所有项目组-->
+    <select id="findAll" resultType="com.itheima.pojo.CheckGroup">
+        select * from t_checkgroup
+    </select>
 
 </mapper>

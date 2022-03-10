@@ -50,10 +50,10 @@ public class CheckGroupController {
     public Result findById(Integer id) {
         try {
             CheckGroup checkGroup = checkGroupService.findById(id);
-            //新增成功
+            //查询成功
             return new Result(true, MessageConstant.QUERY_CHECKGROUP_SUCCESS, checkGroup);
         } catch (Exception e) {
-            //新增失败
+            //查询失败
             return new Result(false, MessageConstant.QUERY_CHECKGROUP_FAIL);
         }
 
@@ -96,6 +96,18 @@ public class CheckGroupController {
             return new Result(false, MessageConstant.DELETE_CHECKGROUP_FAIL);
         }
     }
+    //根据id查询检查组
+    @RequestMapping("/findAll")
+    public Result findAll() {
+        try {
+            List<CheckGroup> list = checkGroupService.findAll();
+            //查询成功
+            return new Result(true, MessageConstant.QUERY_CHECKGROUP_SUCCESS, list);
+        } catch (Exception e) {
+            //查询失败
+            return new Result(false, MessageConstant.QUERY_CHECKGROUP_FAIL);
+        }
 
+    }
 
 }

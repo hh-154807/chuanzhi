@@ -90,4 +90,9 @@ public class CheckGroupServiceImpl implements CheckGroupService {
     }
 
 
+    public List<CheckGroup> findAll() {
+        return checkGroupDao.findAll();
+    }
+
+
 }
