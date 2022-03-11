@@ -71,7 +71,7 @@ public class CheckGroupController {
             return new Result(false, MessageConstant.QUERY_CHECKGROUP_FAIL);
         }
     }
-    //新增检查组
+    //编辑检查组
     @RequestMapping("/edit")
     public Result edit(@RequestBody CheckGroup checkGroup, Integer[] checkitemIds) {
         try {
@@ -92,11 +92,11 @@ public class CheckGroupController {
             return new Result(true, MessageConstant.DELETE_CHECKGROUP_SUCCESS);
         } catch (Exception e) {
             e.printStackTrace();
-            //新增失败
+            //删除失败
             return new Result(false, MessageConstant.DELETE_CHECKGROUP_FAIL);
         }
     }
-    //根据id查询检查组
+    //查询所有项目组
     @RequestMapping("/findAll")
     public Result findAll() {
         try {

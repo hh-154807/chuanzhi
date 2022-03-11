@@ -6,6 +6,7 @@ import com.itheima.constant.RedisConstant;
 import com.itheima.entity.PageResult;
 import com.itheima.entity.QueryPageBean;
 import com.itheima.entity.Result;
+import com.itheima.pojo.CheckGroup;
 import com.itheima.pojo.Setmeal;
 import com.itheima.service.SetmealService;
 import com.itheima.utils.QiniuUtils;
@@ -18,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import redis.clients.jedis.JedisPool;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -51,7 +53,7 @@ public class SetmealController {
             return new Result(true, MessageConstant.PIC_UPLOAD_SUCCESS, fileName);
 
         } catch (IOException e) {
-            e.printStackTrace();
+
             return new Result(false, MessageConstant.PIC_UPLOAD_FAIL, fileName);
         }
     }
@@ -63,7 +65,7 @@ public class SetmealController {
         try {
             setmealService.add(setmeal, checkgroupIds);
         } catch (Exception e) {
-            e.printStackTrace();
+
             return new Result(false, MessageConstant.ADD_SETMEAL_FAIL);
         }
         return new Result(true, MessageConstant.ADD_SETMEAL_SUCCESS);
@@ -75,4 +77,54 @@ public class SetmealController {
         return setmealService.findPage(queryPageBean);
     }
 
+    //按照id查询套餐
+    @RequestMapping("/findById")
+    public Result findById(Integer id) {
+        try {
+         Setmeal setmeal = setmealService.findById(id);
+            //查询成功
+            return new Result(true, MessageConstant.QUERY_SETMEAL_SUCCESS, setmeal);
+        } catch (Exception e) {
+            //查询失败
+            return new Result(false, MessageConstant.QUERY_SETMEAL_FAIL);
+        }
+
+    }
+    //查询所有检查组
+    @RequestMapping("/findCheckGroupIdsBysetmealId")
+    public Result findAll(Integer id) {
+        try {
+            List<Integer> list = setmealService.findCheckGroupIdsBysetmealId(id);
+            //查询成功
+            return new Result(true, MessageConstant.QUERY_CHECKGROUP_SUCCESS, list);
+        } catch (Exception e) {
+            //查询失败
+            return new Result(false, MessageConstant.QUERY_CHECKGROUP_FAIL);
+        }
+
+    }
+    //编辑套餐
+    @RequestMapping("/edit")
+    public Result edit(@RequestBody Setmeal setmeal, Integer[] checkgroupIds) {
+        try {
+            setmealService.edit(setmeal,checkgroupIds);
+        } catch (Exception e) {
+            //新增失败
+            return new Result(false, MessageConstant.EDIT_SETMEAL_FAIL);
+        }
+        //新增成功
+        return new Result(true, MessageConstant.EDIT_SETMEAL_SUCCESS);
+    }
+    //根据套餐id删除套餐
+    @RequestMapping("/delete")
+    public Result delete(Integer id) {
+        try {
+            setmealService.delete(id);
+            return new Result(true, MessageConstant.DELETE_SETMEAL_SUCCESS);
+        } catch (Exception e) {
+
+            //删除失败
+            return new Result(false, MessageConstant.DELETE_SETMEAL_FAIL);
+        }
+    }
 }
