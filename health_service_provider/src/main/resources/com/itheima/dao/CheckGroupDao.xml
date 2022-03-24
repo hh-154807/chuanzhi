@@ -2,6 +2,24 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.itheima.dao.CheckGroupDao">
+
+    <resultMap type="com.itheima.pojo.CheckGroup" id="baseResultMap">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="code" property="code"/>
+        <result column="helpCode" property="helpCode"/>
+        <result column="sex" property="sex"/>
+        <result column="remark" property="remark"/>
+        <result column="attention" property="attention"/>
+    </resultMap>
+    <resultMap id="findByIdResultMap" type="com.itheima.pojo.CheckGroup" extends="baseResultMap">
+        <collection property="checkItems"
+                    ofType="com.itheima.pojo.CheckItem"
+                    javaType="ArrayList"
+                    column="id"
+                    select="com.itheima.dao.CheckItemDao.findCheckItemById">
+        </collection>
+    </resultMap>
     <!--新增-->
     <insert id="add" parameterType="com.itheima.pojo.CheckGroup">
         <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
@@ -75,6 +93,13 @@
     <!--查询所有项目组-->
     <select id="findAll" resultType="com.itheima.pojo.CheckGroup">
         select * from t_checkgroup
+    </select>
+
+    <!--根据套餐id查询关联的检查组详情-->
+    <select id="findCheckGroupById" resultMap="findByIdResultMap">
+        select * from t_checkgroup
+        where id
+        in (select checkgroup_id from t_setmeal_checkgroup where setmeal_id=#{id})
     </select>
 
 </mapper>

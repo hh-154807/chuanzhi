@@ -27,4 +27,7 @@ public interface CheckItemDao {
     public CheckItem findById(Integer id);
 
     public List<CheckItem> findAll();
+
+    public CheckItem findCheckItemById(Integer id);
 }
+

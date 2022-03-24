@@ -6,6 +6,7 @@ import com.itheima.pojo.CheckGroup;
 import com.itheima.pojo.Setmeal;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @ author He
@@ -24,4 +25,11 @@ public interface SetmealService {
     void edit(Setmeal setmeal, Integer[] checkgroupIds);
 
     void delete(Integer id);
+
+    List<Setmeal> findAll();
+
+    Setmeal findSetmealById(Integer id);
+
+    List<Map<String, Object>> findSetmealCount();
+
 }

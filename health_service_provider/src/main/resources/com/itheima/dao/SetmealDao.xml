@@ -2,6 +2,27 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.itheima.dao.SetmealDao">
+    <resultMap id="map" type="com.itheima.pojo.Setmeal">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="code" property="code"/>
+        <result column="helpCode" property="helpCode"/>
+        <result column="sex" property="sex"/>
+        <result column="age" property="age"/>
+        <result column="price" property="price"/>
+        <result column="remark" property="remark"/>
+        <result column="attention" property="attention"/>
+        <result column="img" property="img"/>
+    </resultMap>
+    <resultMap id="findByIdResultMap" type="com.itheima.pojo.Setmeal" extends="map">
+        <!--多对多映射-->
+        <collection property="checkGroups"
+                    javaType="ArrayList"
+                    ofType="com.itheima.pojo.CheckGroup"
+                    select="com.itheima.dao.CheckGroupDao.findCheckGroupById"
+                    column="id"
+        ></collection>
+    </resultMap>
 
     <!--新增-->
     <insert id="add">
@@ -78,7 +99,7 @@
         </if>
     </select>
     <!--通过id查询套餐-->
-    <select id="findByID" resultType="com.itheima.pojo.Setmeal">
+    <select id="findByID" resultMap="findByIdResultMap">
         select *
         from t_setmeal
         where id = #{id}
@@ -88,5 +109,20 @@
         select checkgroup_id
         from t_setmeal_checkgroup
         where setmeal_id = #{id}
+    </select>
+    <!--查询所有套餐-->
+    <select id="findAll" resultType="com.itheima.pojo.Setmeal">
+        select *
+        from t_setmeal
+    </select>
+    <!--根据套餐id查询套餐详情，（套餐基本信息，对应检查组与检查项信息）-->
+    <select id="findSetmealById" resultMap="findByIdResultMap">
+        select *
+        from t_setmeal
+        where id = #{id}
+    </select>
+
+    <select id="findSetmealCount" resultType="map">
+        select s.name, count(o.id) value from t_order o,t_setmeal s where o.setmeal_id = s.id group by s.name
     </select>
 </mapper>

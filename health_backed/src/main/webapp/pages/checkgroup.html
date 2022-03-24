@@ -295,7 +295,7 @@
                             });
                         }else{
                             //操作失败
-                            this.$message().error(res.data.message);
+                            this.$message.error(res.data.message);
                         }
                     }).finally(()=>{
                         //重新进行分页查询
@@ -318,7 +318,7 @@
                             });
                         }else{
                             //操作失败
-                            this.$message().error(res.data.message);
+                            this.$message.error(res.data.message);
                         }
                     }).finally(()=>{
                         //重新进行分页查询
@@ -363,7 +363,7 @@
                             this.tableData=res.data.data;
                         }else{
                             //查询检查项失败
-                            this.$message().error(res.message);
+                            this.$message.error(res.message);
                         }
                     });
                 },
@@ -379,7 +379,7 @@
                             this.formData=res.data.data;
                         }else{
                             //查询失败
-                            this.$message().error(res.data.message);
+                            this.$message.error(res.data.message);
                         }
                     });
                     //发送ajax请求，查询所有检查项数据，用于展示检查项列表
@@ -393,12 +393,12 @@
                                 if(res.data.flag){
                                     this.checkitemIds=res.data.data;
                                 }else{
-                                    this.$message().error(res.message);
+                                    this.$message.error(res.message);
                                 }
                             });
                         }else{
                             //查询检查项失败
-                            this.$message().error(res.message);
+                            this.$message.error(res.message);
                         }
                     });
 

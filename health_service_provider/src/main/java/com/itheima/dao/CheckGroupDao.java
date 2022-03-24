@@ -29,5 +29,7 @@ public interface CheckGroupDao {
     public void deleteCheckGroupById(Integer id);
 
     public List<CheckGroup> findAll();
+
+    public CheckGroup findCheckGroupById(Integer id);
 }
 

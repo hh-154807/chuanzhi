@@ -406,7 +406,7 @@
                         });
                     } else {
                         //失败
-                        this.$message().error(rea.data.message);
+                        this.$message.error(rea.data.message);
                     }
                 }).finally(() => {
                     this.findPage();
@@ -445,7 +445,7 @@
                         this.tableData = res.data.data;
                     } else {
                         //查询失败
-                        this.$message().error(res.data.message);
+                        this.$message.error(res.data.message);
                     }
                 });
             },
@@ -470,7 +470,7 @@
 
                     } else {
                         //查询失败
-                        this.$message().error(res.data.message);
+                        this.$message.error(res.data.message);
                     }
                 });
                 //发送ajax请求，查询所有检查组数据，用于展示检查组列表
@@ -484,12 +484,12 @@
                             if (res.data.flag) {
                                 this.checkgroupIds = res.data.data;
                             } else {
-                                this.$message().error(res.message);
+                                this.$message.error(res.message);
                             }
                         });
                     } else {
                         //查询检查项失败
-                        this.$message().error(res.message);
+                        this.$message.error(res.message);
                     }
                 });
             },
@@ -507,7 +507,7 @@
                         });
                     } else {
                         //操作失败
-                        this.$message().error(res.data.message);
+                        this.$message.error(res.data.message);
                     }
                 }).finally(() => {
                     //重新进行分页查询

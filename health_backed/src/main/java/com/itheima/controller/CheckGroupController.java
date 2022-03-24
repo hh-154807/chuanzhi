@@ -66,7 +66,7 @@ public class CheckGroupController {
             List<Integer> list = checkGroupService.findCheckItemIdsByCheckGroupId(id);
             return new Result(true, MessageConstant.QUERY_CHECKGROUP_SUCCESS, list);
         } catch (Exception e) {
-            e.printStackTrace();
+
             //新增失败
             return new Result(false, MessageConstant.QUERY_CHECKGROUP_FAIL);
         }
@@ -91,7 +91,7 @@ public class CheckGroupController {
            checkGroupService.delete(id);
             return new Result(true, MessageConstant.DELETE_CHECKGROUP_SUCCESS);
         } catch (Exception e) {
-            e.printStackTrace();
+
             //删除失败
             return new Result(false, MessageConstant.DELETE_CHECKGROUP_FAIL);
         }
